@@ -24,9 +24,13 @@ class TodoController extends Controller
     	return view('create');
     }
 
-    public function StoreTodo(){
+    public function StoreTodo(Request $request){
 
-    	$data=request()->all();
+    	$data= $request->validate([
+    		'name'=>'required|min:5',
+    		'description'=>'required',
+    	]);
+
 
     	$todo= new Todo;
     	$todo->name= $data['name'];
